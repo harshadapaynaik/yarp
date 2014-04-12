@@ -23,3 +23,11 @@ def landing_page(request):
     '''
     return render_view(request, 'index.html', {})
 
+
+def blog_page(request, name):
+    '''
+    handles the blog page 
+    @request  request object
+    '''
+    return render_view(request, 'index.html', {})
+

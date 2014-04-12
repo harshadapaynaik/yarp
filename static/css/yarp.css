@@ -13,7 +13,12 @@
 
 }
 
-
+.brand {
+  font-family: 'Leckerli One', cursive;
+  font-weight: 500;
+  font-size: 40px;
+  color: #fff;
+}
 
 .carousel-title a:hover{
 text-decoration: underline;

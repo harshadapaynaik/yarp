@@ -117,6 +117,7 @@ WSGI_APPLICATION = 'yarp.wsgi.application'
 
 TEMPLATE_DIRS = (
     BASE_DIR + 'templates',
+    BASE_DIR + 'dashboard/templates',
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -132,7 +133,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'yarp',
-    'django.contrib.admin',
+    'dashboard',
+    #'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
