@@ -8,3 +8,4 @@ static/cache/
 media/*
 run
 logs
+local_settings.py

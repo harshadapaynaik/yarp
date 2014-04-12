@@ -1,0 +1,32 @@
+.carousel-title{
+	height:400px;
+}
+
+.carousel-title a{
+	color: #ffffff;
+	font-weight: 600;
+}
+
+.carousel-title h1{
+	width: 50%;
+	float: left;
+
+}
+
+
+
+.carousel-title a:hover{
+text-decoration: underline;
+color: #000;
+}
+
+
+.site-topbar {
+background: #4b494f;
+padding: 20px 0;
+color: #999;
+}
+
+.site-main {
+padding-top: 59px;
+}
