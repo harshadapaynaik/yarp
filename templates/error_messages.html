@@ -1,0 +1,16 @@
+{% if type == 'login' %}
+Please enter a correct email and password. Note that both fields are case-sensitive.
+{% endif %}
+
+
+{% if type == 'password_change' %}
+The passwords you entered are invalid. <br />
+Please make sure that you provide your correct old password plus two new matching passwords 
+{% endif %}
+
+
+
+{% if type == 'signup' %}
+Please check that you entered a valid email and password. <br /> 
+Note that both fields are case-sensitive.
+{% endif %}

@@ -24,18 +24,24 @@
 <body>
 	<div class="frame">
 <div class="form-login">
-
+<!-- Notifications-->
 <div class="container tab-pane fade active in" id="dashboardlogin">
 	<div class="row-fluid">
 		<div class="span4 offset4">
-			<form class="form" style="margin-top: -50%" action='{% url "dashboardlogin" %}'>
+			<form method="POST" class="form" style="margin-top: -50%" action='{% url "dashboardlogin" %}'>
+			{% csrf_token %}
 				<h1 class="brand text-center" style="font-size: 60px; margin-bottom: 30px">{{APP_NAME}}</h1>
+				<div class="row-fluid">
+				{% if request.POST.username %} 
+				{% include "notifications.html" %}
+				{% endif %}	
+				</div>
 				<hr>
 				<p class="account-username">
-					<input type="text" required="required" placeholder="Username" class="span12">
+					<input name="username" type="text" required="required" placeholder="Username" class="span12">
 				</p>
 				<p class="account-password">
-					<input type="password" required="required" placeholder="Password" class="span12">
+					<input name="password" type="password" required="required" placeholder="Password" class="span12">
 				</p>
 				<p class="account-helper clearfix" style="margin-bottom: 20px;">
 					
@@ -55,7 +61,7 @@
 <div class="container tab-pane fade" id="dashboardsignup">
 	<div class="row-fluid">
 		<div class="span4 offset4">
-			<form class="form" style="margin-top: -50%">
+			<form method="POST" class="form" style="margin-top: -50%">
 				<h1 class="brand text-center" style="font-size: 60px; margin-bottom: 30px">{{APP_NAME}}</h1>
 				<hr>
 				<p class="account-username">
@@ -78,11 +84,17 @@
 <div class="container tab-pane fade" id="dashboardpass">
 	<div class="row-fluid">
 		<div class="span4 offset4">
-			<form class="form" style="margin-top: -50%" action='{% url "dashboardpass" %}'>
+			<form method="POST" class="form" style="margin-top: -50%" action='{% url "dashboardpass" %}#dashboardpass'>
+			{% csrf_token %}
 				<h1 class="brand text-center" style="font-size: 60px; margin-bottom: 30px">{{APP_NAME}}</h1>
+				<div class="row-fluid">
+				{% if request.POST.email %} 
+				{% include "notifications.html" %}
+				{% endif %}	
+				</div>
 				<hr>
 				<p class="account-username">
-					<input type="text" required="required" placeholder="Enter Email" class="span12">
+					<input name="email" type="text" required="required" placeholder="Enter Email" class="span12">
 				</p>
 				<!--
 				<p class="account-password">

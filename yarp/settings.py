@@ -18,13 +18,8 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__),
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '',                      # Set to empty string for default.
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': os.path.join(BASE_DIR+'db', 'yarp.db'),                      # Or path to database file if using sqlite3.
     }
 }
 
@@ -69,6 +64,8 @@ MEDIA_URL = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = ''
+
+BASE_URL = ''
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -134,7 +131,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'yarp',
     'dashboard',
-    #'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -182,3 +179,5 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+DASHBOARD_URL=BASE_URL+'dashboard'

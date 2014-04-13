@@ -1,0 +1,16 @@
+{% if type == 'password_recover_email' %}
+We have sent a link to {{email}},please check your inbox for details on how to recover your password
+{% endif %}
+
+{% if type == 'login' %}
+You Have Successfully logged in
+{% endif %}
+
+{% if type == 'password_recover' %}
+You have successfully changed your password details. <br />
+You can now log in with your new password
+{% endif %}
+
+{% if type == 'password_change' %}
+You have successfully changed your password details.
+{% endif %}
