@@ -1,6 +1,7 @@
 # Create your views here.
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
+from yarp.models import Post
 
 
 def render_view(request, template, data):
@@ -24,10 +25,12 @@ def landing_page(request):
     return render_view(request, 'index.html', {})
 
 
-def blog_page(request, name):
+def blog_page(request, slug):
     '''
     handles the blog page 
     @request  request object
     '''
+    post = get_object_or_404(Post.objects.filter(slug=slug), slug=slug)
+    print post
     return render_view(request, 'index.html', {})
 

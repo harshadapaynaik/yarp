@@ -26,7 +26,7 @@ $(function(){
 	{
 		var editor = new wysihtml5.Editor("textarea", {
 			toolbar:      "toolbar",
-			stylesheets:  "css/theme-editor.css"
+			stylesheets:  STATIC_URL+"css/theme-editor.css"
 		});
 	}
 });

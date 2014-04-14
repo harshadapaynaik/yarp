@@ -1,0 +1,109 @@
+{% extends "dashboard.html" %}
+
+
+{% block content %}
+
+{% if posts %}
+
+	<section class="row-fluid">
+			<div class="span12">
+				<div class="module no-head message">
+					<div class="module-body no-padding">
+						<div class="module-option">
+							<div class="row-fluid">
+								<div class="span8">
+									<form class="form-absolute">
+										<button class="btn btn-icon go-right"><i class="icon-search"></i></button>
+										<input type="text" name="search" class="input-block-level" placeholder="Search posts..." autocomplete="off">
+									</form>
+								</div>
+								<div class="span4 message-navigation align-right hidden-phone">
+									<div class="btn-toolbar">
+										<div class=" btn-group">
+											<button class="btn"><i class="icon-chevron-left"></i></button>
+											<button class="btn"><i class="icon-chevron-right"></i></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<table class="table table-utilities vertical-top">
+							<tbody>
+
+
+								{% for p in posts %}
+
+
+								<tr>
+									{% if p.attachment %}
+									<td class="cell-avatar">
+										<img src="images/samples/avatar-2.jpg" class="avatar img-circle">
+									</td>
+									{% endif %}
+									<td class="cell-detail">
+										<button type="button" class="btn btn-inverse pull-right" data-toggle="collapse" data-target="#people-brief-{{p.id}}"><i class="icon-ellipsis-horizontal"></i></button>
+										<h5 class="people-name"><a href='{% url "blogpost" p.slug %}'>{{p.title}}</a></h5>
+										<div class="people-brief">{{p.body}}</div>
+										
+										<!--
+										<div class="muted">
+											255 friends, Kuala Lumpur, MY
+										</div>
+										-->
+										<div class="people-action">
+											<div id="people-brief-{{p.id}}" class="collapse">
+												<p>
+													{% if p.is_published %}
+													<button class="btn btn-danger"><i class="icon-off"></i> &nbsp; UnPublish</button>
+													{% else %}
+													<button class="btn btn-success"><i class="icon-on"></i> &nbsp;Publish</button>
+													{%endif%}
+
+													<button class="btn btn-primary"><i class="icon-edit"></i> &nbsp; Edit</button>
+													<button class="btn btn-danger"><i class="icon-remove"></i> &nbsp; Delete</button>
+
+												</p>
+											</div>
+										</div>
+									</td>
+								</tr>
+
+								 {% endfor %}
+
+							</tbody>
+						</table>
+						<div class="module-option">
+							<div class="row-fluid">
+								<div class="span8 hidden-phone">
+									<div style="line-height: 30px">
+										Displaying <b>10</b> of {{ posts.count }} posts
+									</div>
+								</div>
+								<div class="span4 message-navigation align-right">
+									<div class="btn-toolbar">
+										<div class=" btn-group">
+											<button class="btn"><i class="icon-chevron-left"></i></button>
+											<button class="btn"><i class="icon-chevron-right"></i></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!--/.module-body-->
+				</div><!--/.module.message-->
+			</div><!--/.span12-->
+		</section><!--/.row-fluid-->
+
+{% else %}
+<section class="module">
+<div class="module-body">
+<div class="alert">
+				  
+				  You Currently have no Posts! <br /><strong><a href="{{DASHBOARD_URL}}">Click here </a></strong> to create some.
+				</div>
+				</div>
+				</section>
+{% endif %}
+
+
+{% endblock %}

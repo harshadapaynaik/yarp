@@ -2,6 +2,10 @@
 Please enter a correct email and password. Note that both fields are case-sensitive.
 {% endif %}
 
+{% if type == 'addpost' %}
+Make sure you have added a title and body to your Post. <br />
+Also note that a title cannot be more than 60 characters
+{% endif %}
 
 {% if type == 'password_change' %}
 The passwords you entered are invalid. <br />

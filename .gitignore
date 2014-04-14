@@ -1,6 +1,7 @@
 *.db
 *.swp
 *.pyc
+yarp/migrations/
 static/cache/
 .DS_Store/
 *.pyc

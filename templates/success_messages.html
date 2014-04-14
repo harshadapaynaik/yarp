@@ -14,3 +14,11 @@ You can now log in with your new password
 {% if type == 'password_change' %}
 You have successfully changed your password details.
 {% endif %}
+
+
+{% if type == 'addpost' %}
+Your Post was successfully Saved. <br />
+{% if is_published %}
+It has been published, You can check it out <a href='{% url "blogpost" post.slug %}'>here</a> 
+{% endif %}
+{% endif %}

@@ -1,4 +1,9 @@
 Yarp
 =============================
-A Django Blogging Platform
-That Allows you to build Apps into your Posts
+Beautiful blogging platform
+Built with Django
+
+Features
+=============================
+Live Preview
+Inbuilt Analytics

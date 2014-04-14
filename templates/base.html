@@ -21,12 +21,23 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-6" style="margin-top: -25px;"><span class="brand text-center" >Yarp</span></div>
+              
+              {% if LOGGED_IN %}
+
+              <div class="col-sm-6" >
+              <a href="{{DASHBOARD_URL}}">Dashboard</a>
+              </div>
+
+              {% else %}
               <div class="social-links col-sm-6">
                 <a href="index.html#"><i class="fa fa-facebook"></i></a>
                 <a href="index.html#"><i class="fa fa-twitter"></i></a>
                 <a href="index.html#"><i class="fa fa-google-plus"></i></a>
                 <a href="index.html#"><i class="fa fa-pinterest"></i></a>
               </div>
+
+              {% endif %}
+
             </div>
           </div>
         </nav>

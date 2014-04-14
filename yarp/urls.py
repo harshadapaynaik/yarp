@@ -7,10 +7,12 @@ from django.conf import settings
 urlpatterns = patterns('',
    url(r'^$', 'yarp.views.landing_page', name='index'),
    url(r'^dashboard/login/$', 'dashboard.views.login_page', name='dashboardlogin'),
-   url(r'^dashboard/logout/$', 'django.contrib.auth.views.logout',{'next_page': settings.DASHBOARD_URL}),
+   url(r'^dashboard/logout/$', 'django.contrib.auth.views.logout',{'next_page': settings.DASHBOARD_URL},name='dashboardlogout'),
    url(r'^dashboard/password/$', 'dashboard.views.recover_password', name='dashboardpass'),
-   url(r'^dashboard$', 'dashboard.views.landing_page', name='faq'),
-   url(r'^(\w+)/$','yarp.views.blog_page', name='blog'),
+   url(r'^dashboard/posts/$', 'dashboard.views.posts_page', name='dashboardposts'),
+   url(r'^dashboard/password/$', 'dashboard.views.recover_password', name='dashboardanalytics'),
+   url(r'^dashboard$', 'dashboard.views.landing_page', name='dashboard'),
+   url(r'^(?P<slug>[-\w]+)/$', 'yarp.views.blog_page', name='blogpost'),
    
    (r'^static/(?P<path>.*)$', 'django.views.static.serve',
     {'document_root': settings.STATIC_ROOT, 'show_indexes':True}
