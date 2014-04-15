@@ -33,10 +33,9 @@ def landing_page(request):
     if not request.user.is_active or not request.user.is_staff:
         return render_view(request, 'login.html', {})
     if request.POST:
-        form = AddPostForm(request.POST)
+        form = AddPostForm(request.POST, request.FILES)
         if not form.is_valid():
             error_message(request, "addpost")
-            print form.errors
         else:
             post = form.save()
             success_message(request, "addpost", {'post': post, 'is_published': request.POST['is_published']})
