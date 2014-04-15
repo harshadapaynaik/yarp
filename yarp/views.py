@@ -22,7 +22,7 @@ def landing_page(request):
     handles the landing page 
     @request  request object
     '''
-    return render_view(request, 'index.html', {})
+    return render_view(request, 'index.html', {'featuredposts': featuredPosts()})
 
 
 def blog_page(request, slug):
@@ -31,6 +31,18 @@ def blog_page(request, slug):
     @request  request object
     '''
     post = get_object_or_404(Post.objects.filter(slug=slug), slug=slug)
-    print post
-    return render_view(request, 'index.html', {})
+    return render_view(request, 'post.html', {'post': post, 'featuredposts': featuredPosts()})
 
+
+def featuredPosts():
+    '''
+    Get featured posts from db
+    '''
+    posts = {}
+    try:
+        posts = Post.objects.all().filter(is_featured=1)[:4]
+    except Exception:
+        pass
+    if not posts.count():
+        posts = Post.objects.all().order_by('-id')[:4]
+    return posts

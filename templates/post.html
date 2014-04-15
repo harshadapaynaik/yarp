@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{APP_NAME}}</title>
+    <title>{{post.title}} | {{APP_NAME}}</title>
     <link href="{{STATIC_URL}}css/template.css" rel="stylesheet">
      <link href="{{STATIC_URL}}css/yarp.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -17,29 +17,31 @@
   <body>
     <div id="page">
       <header id="header" class="site-header">
-        
-        <nav id="navbar" class="site-navbar navbar navbar-static-top" role="navigation">
+        <nav id="topbar" class="site-topbar" role="navigation">
           <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <i class="fa fa-bars"></i>
-              </button>
-              <h1 class="navbar-brand"><span class="brand text-center" >Yarp</span></h1>
-            </div>
+            <div class="row">
+              <div class="col-sm-6" style="margin-top: -25px;"><span class="brand text-center" style="color:#fff !important;" >
+              <a href="{{BASE_URL}}">Yarp</a></span></div>
+              
+              {% if LOGGED_IN %}
 
-            <div class="collapse navbar-collapse" id="navbar-collapse-1">
-              <ul id="navigation" class="nav navbar-nav navbar-right">
-               <li><a href="{{BASE_URL}}#blog">Blog</a></li>
-                <!--
-                <li class="active"><a href="index.html#header" class="current">Home</a></li>
-                <li><a href="index.html#features">Features</a></li>
-                <li><a href="index.html#portfolio">Portfolio</a></li>
-                <li><a href="index.html#testimonials">Testimonials</a></li>
-                <li><a href="index.html#blog">Blog</a></li>
-                <li><a href="index.html#clients">Clients</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-                -->
+              <div class="col-sm-6 pull-right text-right"  >
+              <a href="{{DASHBOARD_URL}}">Dashboard</a>
+              </div>
+
+              {% else %}
+              <div class="social-links col-sm-6">
+                <a href="index.html#"><i class="fa fa-facebook"></i></a>
+                <a href="index.html#"><i class="fa fa-twitter"></i></a>
+                <a href="index.html#"><i class="fa fa-google-plus"></i></a>
+                <a href="index.html#"><i class="fa fa-pinterest"></i></a>
+              </div>
+
+              {% endif %}
+
+            </div>
+          </div>
+        </nav>
               </ul>
             </div>
           </div>
@@ -53,31 +55,40 @@
       <main id="main" class="site-main">
 
         <section id="carousel-1" class="carousel slide section-slide" data-ride="carousel">
+
+        {% if post.attachment %}
+
           <div class="carousel-inner">
            
             <div class="item active" style="background: url({{STATIC_URL}}img/superhero-dreams.jpg) no-repeat center;">
-              <div class="container"><img src="{{STATIC_URL}}img/typo-1.png" alt="First slide"></div>
+              <div class="container"><img src="{{post.attachment}}" alt="{{post.attachment}}"></div>
             </div>
-            <div class="item" style="background: url({{STATIC_URL}}img/bg-2.jpg) no-repeat center;">
-              <div class="container"><img src="{{STATIC_URL}}img/typo-2.png" alt="First slide"></div>
-            </div>
-            <div class="item" style="background: url({{STATIC_URL}}img/bg-3.jpg) no-repeat center;">
-              <div class="container"><img src="{{STATIC_URL}}img/typo-3.png" alt="First slide"></div>
             </div>
 
             
 
           </div>
+
+          {% endif %}
+          <!--
           <a class="left carousel-control" href="#carousel-1" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
           <a class="right carousel-control" href="#carousel-1" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+          -->
         </section>
 
-        
+        <section class="section text-left section-cta post">
+          <div class="container">
+            <h2 class="section-title post-title"><span>{{post.title}}</span></h2>
+            <div class="span12 post-content">{{post.body |safe }}</div>
+   
+          </div>
+        </section>
 
        
-        {% include "featured_posts.html" %}
 
+      
 
+{% include "featured_posts.html" %}
        
 
       </main>

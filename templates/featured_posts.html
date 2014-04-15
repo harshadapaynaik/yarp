@@ -1,0 +1,44 @@
+  {% load custom_filters %}
+
+  <section id="blog" class="section section-blog">
+          <div class="container">
+            
+            
+            <div class="row">
+
+            {% for p in featuredposts %}
+
+
+             <div class="col-md-6">
+                <article class="hentry post">
+                  <div class="row">
+                    <div class="entry-thumbnail col-lg-4 col-md-5 col-sm-4">
+                      <a href='{% url "blogpost" p.slug %}' class="hover-effect">
+                        <img src="{{p.attachement}}" alt="{{p.slug}}" />
+                        <span class="overlay"><i class="fa fa-plus"></i></span>
+                      </a>
+                    </div>
+                    <div class="col-lg-8 col-md-7 col-sm-8">
+                      <header class="entry-header">
+                        <h2 class="entry-title"><a href='{% url "blogpost" p.slug %}'>{{ p.title | chop_title | striptags}}</a></h2>
+                        <!--
+                        <div class="entry-meta">By <a href="index.html#">Jackie Lord</a> in <a href="index.html#">Category</a></div>
+                        -->
+                      </header>
+                      <div class="entry-content">
+                        <p>{{ p.body  | chop_body | striptags}}</p>
+                        <a href='{% url "blogpost" p.slug %}' class="more"><span class="btn btn-primary">Continue Reading</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+
+            {% endfor %}
+
+
+          
+            </div>
+          </div>
+        </section>

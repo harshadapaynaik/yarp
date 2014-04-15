@@ -19,3 +19,13 @@ def is_false(arg):
 @register.filter
 def date_today(arg):
 	return datetime.today().strftime("%B %d, %Y")
+
+
+@register.filter
+def chop_title(s, l = 20):
+	return s if len(s)<=l else s[0:l-3]+'...'
+
+
+@register.filter
+def chop_body(s, l = 50):
+	return s if len(s)<=l else s[0:l-3]+'...'

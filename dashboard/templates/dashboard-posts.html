@@ -1,6 +1,8 @@
 {% extends "dashboard.html" %}
 
 
+{% load custom_filters %}
+
 {% block content %}
 
 {% if posts %}
@@ -43,7 +45,7 @@
 									<td class="cell-detail">
 										<button type="button" class="btn btn-inverse pull-right" data-toggle="collapse" data-target="#people-brief-{{p.id}}"><i class="icon-ellipsis-horizontal"></i></button>
 										<h5 class="people-name"><a href='{% url "blogpost" p.slug %}'>{{p.title}}</a></h5>
-										<div class="people-brief">{{p.body}}</div>
+										<div class="people-brief">{{ p.body  | chop_body:200 | striptags}}</div>
 										
 										<!--
 										<div class="muted">
