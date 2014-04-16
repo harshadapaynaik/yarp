@@ -134,6 +134,5 @@ def editblog_page(request, slug, action):
             success_message(request, "editpost", {'post': post})
             action = 'edit'
             return HttpResponseRedirect(reverse('editblogpost', args=(slug, action)))
-
     return render_view(request, 'dashboard-editpost.html', {'post': post, 'action': action})
 
