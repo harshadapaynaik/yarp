@@ -32,8 +32,12 @@ STATIC_URL = '{{STATIC_URL}}dashboard/';
 
 	<ul class="nav nav-list">
 	
+	<li class="active" >
+			<a href='{% url "dashboard" %}'><i class="icon-dashboard"></i>Dashboard</a>
+		</li>	
+
 	<li>
-	<a href='{% url "dashboard" %}'><i class="icon-text-width"></i>Write</a>
+	<a href='{% url "dashboardblog" %}'><i class="icon-text-width"></i>Blog</a>
 	</li>
 
 	<li>
@@ -42,7 +46,21 @@ STATIC_URL = '{{STATIC_URL}}dashboard/';
 
 
 	<li>
-	<a href='{% url "dashboardanalytics" %}'><i class="icon-bar-chart"></i>Analytics</a>
+	<a href='{% url "dashboardposts" %}'><i class="icon-group"></i>People</a>
+	</li>
+
+	<li>
+	<a href='{% url "dashboardposts" %}'><i class="icon-user"></i>Profile</a>
+	</li>
+
+
+	<!--
+	<li>
+	<a href='{% url "dashboardanalytics" %}'><i class="icon-twitter"></i>Twitter</a>
+	</li>
+
+	<li>
+	<a href='{% url "dashboardanalytics" %}'><i class="icon-facebook"></i>Facebook</a>
 	</li>
 
 	<!--
@@ -122,13 +140,13 @@ STATIC_URL = '{{STATIC_URL}}dashboard/';
 </div>
 <div class="content">
 
-	<div class="navbar navbar-static-tops">
+	<div class="navbar navbar-static-tops hidden-desktop">
 	<div class="navbar-inner">		
 		<a href="javascript:void(0);" class="btn pull-left toggle-sidebar hidden-desktop"><i class="icon-reorder"></i></a>
 		
 
 
-		<div class="pull-right span5">
+		<div  class="pull-right toggle-sidebar">
 		<a class="pull-right" href='{% url "dashboardlogout" %}'>logout</a>
 		</div>
 	

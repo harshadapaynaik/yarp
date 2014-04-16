@@ -46,6 +46,25 @@ def landing_page(request):
 
 
 @login_required
+def blog_page(request):
+    '''
+    handles the dashobard landing page
+    if user not logged in and not stuff we show them the login page
+    @request  request object
+    '''
+    if not request.user.is_active or not request.user.is_staff:
+        return render_view(request, 'login.html', {})
+    if request.POST:
+        form = AddPostForm(request.POST, request.FILES)
+        if not form.is_valid():
+            error_message(request, "addpost")
+        else:
+            post = form.save()
+            success_message(request, "addpost", {'post': post, 'is_published': request.POST['is_published']})
+    return render_view(request, 'dashboard-blog.html', {})
+
+
+@login_required
 def posts_page(request):
     '''
     handles the dashobard posts
