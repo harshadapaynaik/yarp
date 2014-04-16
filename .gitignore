@@ -7,7 +7,7 @@ static/cache/
 *.pyc
 *.pyo
 *~
-media/*
+static/media/*
 run
 logs
 local_settings.py
