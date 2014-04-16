@@ -14,10 +14,21 @@
 						<div class="module-option">
 							<div class="row-fluid">
 								<div class="span8">
+								<div class="span9">
 									<form class="form-absolute">
 										<button class="btn btn-icon go-right"><i class="icon-search"></i></button>
 										<input type="text" name="search" class="input-block-level" placeholder="Search posts..." autocomplete="off">
 									</form>
+									
+									</div>
+									<div class="span3">
+									<select class="btn input-block-level">
+										<option>All</option>
+										<option>Published</option>
+										<option>UnPublished</option>
+									</select>
+									</div>
+
 								</div>
 								<div class="span4 message-navigation align-right hidden-phone">
 									<div class="btn-toolbar">
@@ -36,16 +47,17 @@
 								{% for p in posts %}
 
 
-								<tr>
+								<tr><td class="cell-avatar">
 									{% if p.attachment %}
-									<td class="cell-avatar">
-										<img src="images/samples/avatar-2.jpg" class="avatar img-circle">
-									</td>
+									
+										<img src="{{p.attachment.url}}" class="avatar editpost-img">
+									
 									{% endif %}
+									</td>
 									<td class="cell-detail">
 										<button type="button" class="btn btn-inverse pull-right" data-toggle="collapse" data-target="#people-brief-{{p.id}}"><i class="icon-ellipsis-horizontal"></i></button>
 										<h5 class="people-name"><a href='{% url "blogpost" p.slug %}'>{{p.title}}</a></h5>
-										<div class="people-brief">{{ p.body  | chop_body:200 | striptags}}</div>
+										<div class="people-brief">{{ p.body  | chop_body:250 | striptags}}</div>
 										
 										<!--
 										<div class="muted">
@@ -56,13 +68,13 @@
 											<div id="people-brief-{{p.id}}" class="collapse">
 												<p>
 													{% if p.is_published %}
-													<button class="btn btn-danger"><i class="icon-off"></i> &nbsp; UnPublish</button>
+													<a href='{% url "editblogpost" slug=p.slug action="unpublish" %}' class="btn btn-danger"><i class="icon-off"></i> &nbsp; UnPublish</a>
 													{% else %}
-													<button class="btn btn-success"><i class="icon-on"></i> &nbsp;Publish</button>
+													<a href='{% url "editblogpost" slug=p.slug action="publish" %}' class="btn btn-success"><i class="icon-on"></i> &nbsp;Publish</a>
 													{%endif%}
 
-													<button class="btn btn-primary"><i class="icon-edit"></i> &nbsp; Edit</button>
-													<button class="btn btn-danger"><i class="icon-remove"></i> &nbsp; Delete</button>
+													<a href='{% url "editblogpost" slug=p.slug action="edit" %}' class="btn btn-primary"><i class="icon-edit"></i> &nbsp; Edit</a>
+													<a href='{% url "editblogpost" slug=p.slug action="delete" %}' class="btn btn-danger"><i class="icon-remove"></i> &nbsp; Delete</a>
 
 												</p>
 											</div>

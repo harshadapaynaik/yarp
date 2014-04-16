@@ -22,3 +22,21 @@ Your Post was successfully Saved. <br />
 It has been published, You can check it out <a href='{% url "blogpost" post.slug %}'>here</a> 
 {% endif %}
 {% endif %}
+
+
+{% if type == 'editpost' %}
+Your Post was successfully Saved. <br />
+{% if post.is_published %}
+You can check it out <a href='{% url "blogpost" post.slug %}'>here</a> 
+{% endif %}
+{% endif %}
+
+
+{% if type == 'deletepost' %}
+The Post Was Successfully Removed
+{% endif %}
+
+
+{% if type == 'unpublish' %}
+The Post Was Successfully Saved As A Draft
+{% endif %}

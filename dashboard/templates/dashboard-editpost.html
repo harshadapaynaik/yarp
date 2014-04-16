@@ -1,0 +1,133 @@
+{% extends "dashboard.html" %}
+
+
+{% block content %}
+
+
+
+
+		<section class="module">
+			<div class="module-head">
+				<b>Create A Post</b>
+			</div><!--/.module-head-->
+			<div class="module-body">
+			
+				<form action='{% url "editblogpost" slug=post.slug action=action %}' method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<input type="hidden" name="post_action" id="post_action" value="{{action}}">
+				<input type="hidden" name="owner" value="{{request.user.pk}}">
+				<div class="control-group">
+									<div class="controls">
+										<input value="{{post.title}}" required="required" name="title" type="text" id="basicinput" placeholder="Post Title ..." class="span10">
+									</div>
+								</div>
+					<div id="toolbar" style="display: none;">
+						<p>
+							<span class="btn-toolbar" data-toggle="buttons-checkbox">
+								<span class=" btn-group">
+									<a class="btn" data-wysihtml5-command="bold" title="CTRL+B"><i class="icon-bold"></i></a>
+									<a class="btn" data-wysihtml5-command="italic" title="CTRL+I"><i class="icon-italic"></i></a>
+								</span>
+								<span class=" btn-group">
+									<a class="btn" data-wysihtml5-command="createLink"><i class="icon-link"></i></a>
+									<a class="btn" data-wysihtml5-command="insertImage"><i class="icon-picture"></i></a>
+								</span>
+								<span class=" btn-group">
+									<a class="btn" data-wysihtml5-command="insertUnorderedList"><i class="icon-list-ul"></i></a>
+									<a class="btn" data-wysihtml5-command="insertOrderedList"><i class="icon-list-ol"></i></a>
+								</span>
+								<span class="btn-group">
+									<a class="btn" data-wysihtml5-action="change_view">switch to html view</a>
+								</span>
+							</span>
+						</p>								    
+						<p data-wysihtml5-dialog="createLink" style="display: none;">
+							<label>
+								Link:
+								<input type="text" data-wysihtml5-dialog-field="href" value="http://">
+							</label>
+							<a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+						</p>
+				    
+						<p data-wysihtml5-dialog="insertImage" style="display: none;">
+							<label>
+								Image:
+								<input type="text" data-wysihtml5-dialog-field="src" value="http://">
+							</label>
+							<label>
+								Align:
+								<select data-wysihtml5-dialog-field="className">
+									<option value="">default</option>
+									<option value="wysiwyg-float-left">left</option>
+									<option value="wysiwyg-float-right">right</option>
+								</select>
+							</label>
+							<a data-wysihtml5-dialog-action="save">OK</a>&nbsp;<a data-wysihtml5-dialog-action="cancel">Cancel</a>
+						</p>
+					</div>
+					
+					<p><textarea required="required" name="body" id="textarea" class="input-block-level" rows="10"  placeholder="Start typing here now ...">{{post.body}}</textarea></p>
+					
+					<div class="control-group">
+									<div class="controls">
+										
+										{% if post.attachment %}
+										<label>Change Image</label>
+										{%else%}
+										<label>Attach An Image</label>
+										{%endif%}
+										<input  name="attachment" type="file" placeholder="Attach An Image ..." class="span10" multiple accept='image/*'>
+									</div>
+								</div>
+
+					{% if action == 'edit'%}
+
+					{% if post.is_published == 1 %}
+					<div class="control-group">
+									<label class="control-label">Publish This Post</label>
+									<div class="controls">
+										<label class="checkbox inline">
+											<input type="checkbox"  name="is_published">
+										</label>
+									</div>
+								</div>
+					{%endif%}
+
+					<button class="btn btn-success">Save Changes</button>
+					{% endif %}
+					
+					{% if action == 'publish'%}
+					<button class="btn btn-success">Publish Post</button>
+					{% endif %}
+					
+					{% if action == 'unpublish'%}
+					<button class="btn btn-primary">Save As Draft</button>
+					{% endif %}
+
+					{% if action == 'delete' or action == 'unpublish' %}
+					<button class="btn btn-danger" onclick="$('#post_action').val('delete')">Delete This Post</button>
+					{%endif%}
+
+				</form>
+			</div><!--/.module-body-->
+		</section><!--/.module-->
+
+{% endblock %}
+
+
+
+{% block scripts %}
+<!-- WYSIHTML5 TEXT EDITOR -->
+<script src="{{STATIC_URL}}dashboard/scripts/wysihtml5/advanced.js"></script>
+<script src="{{STATIC_URL}}dashboard/scripts/wysihtml5/wysihtml5-0.3.0.min.js"></script>
+<!-- AUTOSIZE TEXTAREA -->
+<script src='{{STATIC_URL}}dashboard/scripts/autosize/jquery.autosize-min.js'></script>
+<!-- BOOTSTRAP DATEPICKER -->
+<script src="{{STATIC_URL}}dashboard/scripts/bootstrap-datepicker.js"></script>
+
+<!-- FULLCALENDAR -->
+<script src="{{STATIC_URL}}dashboard/scripts/fullcalendar/fullcalendar.custom.js"></script>
+
+<!-- MIXITUP -->
+<script src="{{STATIC_URL}}dashboard/scripts/mixitup/jquery.mixitup.min.js"></script>
+{% endblock %}

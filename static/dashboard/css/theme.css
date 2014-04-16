@@ -2091,3 +2091,11 @@ a.fc-event,
     display: block;
   }
 
+.editpost-img{
+  width: auto !important;
+  height: 140px;
+}
+
+.wysihtml5-sandbox{
+  width: 100% !important;
+}
