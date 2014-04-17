@@ -186,4 +186,5 @@ try:
 except ImportError:
     pass
 
-DASHBOARD_URL=BASE_URL+'dashboard'
+DASHBOARD_URL = BASE_URL + 'dashboard/'
+LOGIN_URL = DASHBOARD_URL + 'login'

@@ -22,7 +22,8 @@ def landing_page(request):
     handles the landing page 
     @request  request object
     '''
-    return render_view(request, 'index.html', {'featuredposts': featuredPosts()})
+    #return render_view(request, 'index.html', {'featuredposts': featuredPosts()})
+    return render_view(request, 'landing.html', {'featuredposts': featuredPosts()})
 
 
 def blog_page(request, slug):

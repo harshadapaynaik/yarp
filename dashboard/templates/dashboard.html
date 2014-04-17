@@ -46,101 +46,20 @@ STATIC_URL = '{{STATIC_URL}}dashboard/';
 
 
 	<li>
-	<a href='{% url "dashboardposts" %}'><i class="icon-group"></i>People</a>
+	<a href='{% url "dashboardpeople" %}'><i class="icon-group"></i>People</a>
 	</li>
 
 	<li>
-	<a href='{% url "dashboardposts" %}'><i class="icon-user"></i>Profile</a>
+	<a href='{% url "dashboardprofile" %}'><i class="icon-user"></i>Profile</a>
 	</li>
 
 
-	<!--
-	<li>
-	<a href='{% url "dashboardanalytics" %}'><i class="icon-twitter"></i>Twitter</a>
-	</li>
-
-	<li>
-	<a href='{% url "dashboardanalytics" %}'><i class="icon-facebook"></i>Facebook</a>
-	</li>
-
-	<!--
-		<li class="nav-header">Pages</li>
-		<li class="active" >
-			<a href="index.html"><i class="icon-dashboard"></i>Dashboard</a>
-		</li>
-		<!-- <li>
-			<a href="activity.html"><i class="icon-bullhorn"></i>Activity</a>
-		</li> 
-		<li>
-			<a href="page-message.html"><i class="icon-inbox"></i>Message<b class="label">6</b></a>
-		</li>
-		<li>
-			<a href="page-people.html"><i class="icon-group"></i>People</a>
-		</li>
-		<li>
-			<a href="page-calendar.html"><i class="icon-calendar"></i>Calendar</a>
-		</li>
-		<li>
-			<a href="page-gallery.html"><i class="icon-picture"></i>Gallery</a>
-		</li>
-		<li>
-			<a href="page-profile.html"><i class="icon-user"></i>Profile</a>
-		</li>
-
-
-
-		<li class="nav-header">Elements</li>
-		<li>
-			<a href="element-typography.html"><i class="icon-text-width"></i>Typography</a>
-		</li>
-		<li>
-			<a href="element-layout.html"><i class="icon-desktop"></i>Layout</a>
-		</li>
-		<li>
-			<a href="element-tables.html"><i class="icon-table"></i>Tables</a>
-		</li>
-		<li>
-			<a href="element-form.html"><i class="icon-list-alt"></i>Form</a>
-		</li>
-		<li>
-			<a href="element-buttons.html"><i class="icon-pushpin"></i>Buttons</a>
-		</li>
-		<li>
-			<a href="element-icons.html"><i class="icon-truck"></i>Icons</a>
-		</li>
-		<li>
-			<a href="element-charts.html"><i class="icon-bar-chart"></i>Charts</a>
-		</li>
-
-
-
-		<li class="nav-header">Extra</li>
-		<li>
-			<a href="extra-login.html"><i class="icon-key"></i>Login</a>
-		</li>
-
-
-		<li class="nav-header">Bandwidth Transfer</li>
-		<li>
-			<div class="progress progress-danger small">
-				<div class="bar" style="width: 80%;"></div>
-			</div>
-			<div>19419.94 / 12000 MB</div>
-		</li>
-		<li class="nav-header">Disk Space Usage</li>
-		<li>
-			<div class="progress small">
-				<div class="bar" style="width: 20%;"></div>
-			</div>
-			<div>304.44 / 8000 MB</div>
-		</li>
-		-->
 	</ul>
 </div>
 </div>
 <div class="content">
 
-	<div class="navbar navbar-static-tops hidden-desktop">
+	<div class="navbar navbar-static-tops">
 	<div class="navbar-inner">		
 		<a href="javascript:void(0);" class="btn pull-left toggle-sidebar hidden-desktop"><i class="icon-reorder"></i></a>
 		
@@ -160,6 +79,7 @@ STATIC_URL = '{{STATIC_URL}}dashboard/';
 		</ul>
 		-->
 
+		<div class="span12">
 		<div class="span3">
 		<h2>{{pagename}}</h2>
 		<div class="muted">
@@ -172,7 +92,13 @@ STATIC_URL = '{{STATIC_URL}}dashboard/';
 			{% include "notifications.html" %}
 
 		</div>
-	
+		</div>
+
+		{% block headcontent %}
+
+
+
+	{% endblock %}
 
 	</div>
 	<div class="content-body">

@@ -16,42 +16,28 @@
 
   <body>
     <div id="page">
+     {% if LOGGED_IN %}
       <header id="header" class="site-header">
         <nav id="topbar" class="site-topbar" role="navigation">
           <div class="container">
             <div class="row">
-              <div class="col-sm-6" style="margin-top: -25px;"><span class="brand text-center" style="color:#fff !important;" >
+              <div class="col-sm-6"><span class="brand text-center" style="color:#fff !important;" >
               <a href="{{BASE_URL}}">Yarp</a></span></div>
               
-              {% if LOGGED_IN %}
+             
 
               <div class="col-sm-6 pull-right text-right"  >
               <a href="{{DASHBOARD_URL}}">Dashboard</a>
               </div>
 
-              {% else %}
-              <div class="social-links col-sm-6">
-                <a href="index.html#"><i class="fa fa-facebook"></i></a>
-                <a href="index.html#"><i class="fa fa-twitter"></i></a>
-                <a href="index.html#"><i class="fa fa-google-plus"></i></a>
-                <a href="index.html#"><i class="fa fa-pinterest"></i></a>
-              </div>
 
-              {% endif %}
+              
 
             </div>
           </div>
         </nav>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-       
-
-
       </header>
-
+      {% endif %}
       <main id="main" class="site-main">
 
         <section id="carousel-1" class="carousel slide section-slide" data-ride="carousel">

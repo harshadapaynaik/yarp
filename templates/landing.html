@@ -1,10 +1,27 @@
-{% extends "base.html" %}
+{% extends "blogbase.html" %}
 
-
+  {% load custom_filters %}
 
 {% block content %}
 
+        <section id="carousel-1" class="carousel slide section-slide" data-ride="carousel">
+          <div class="carousel-inner">
+           
+           	{% for p in featuredposts %}	
+            <div  {% if forloop.first %}class="item active"{%else%}class="item"{% endif %} {% if  p.attachment %}style="background: #222;"{% endif%}>
+            	{% if p.attachment %}
+            	<img src="{{p.attachement.url}}" alt="{{p.slug}}">
+            	{% endif%}
+              <div class="carousle-text">{{ p.title | chop_title:40 | striptags}}</div>
+            </div>
+  			{% endfor %}
+          
 
+            
 
-
+          </div>
+          <a class="left carousel-control" href="#carousel-1" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
+          <a class="right carousel-control" href="#carousel-1" data-slide="next"><span class="fa fa-chevron-right"></span></a>
+        </section>    
+{% include "featured_posts.html" %}
 {% endblock %}

@@ -79,6 +79,36 @@ def posts_page(request):
     return render_view(request, 'dashboard-posts.html', {'posts': posts})
 
 
+@login_required
+def people_page(request):
+    '''
+    handles the dashobard posts
+    '''
+    posts = {}
+    #pagename = 'Posts'
+    #pagedesc = 'Edit your posts here'
+    try:
+        posts = Post.objects.all().order_by('-id')
+    except Exception, e:
+        raise e
+    return render_view(request, 'dashboard-people.html', {'posts': posts})
+
+
+@login_required
+def profile_page(request):
+    '''
+    handles the dashobard posts
+    '''
+    posts = {}
+    #pagename = 'Posts'
+    #pagedesc = 'Edit your posts here'
+    try:
+        posts = Post.objects.all().order_by('-id')
+    except Exception, e:
+        raise e
+    return render_view(request, 'dashboard-profile.html', {'posts': posts})
+
+
 @logged_out_required
 def login_page(request):
     '''

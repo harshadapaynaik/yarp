@@ -182,3 +182,25 @@ color: #ffffff !important;
 .whats-this a{
 	color: rgb(96, 189, 96);
 }
+
+.profile-head{
+margin-top: 15px;
+}
+
+
+.carousle-text{
+position: absolute;
+top: 20%;
+left: 1.8%;
+right: auto;
+width: 96.66666666666666%;
+color: #fff;
+font-family: 'Roboto Slab',Georgia,"Times New Roman",Times,serif;
+font-weight: 600;
+line-height: 1.2;
+font-size: 40px;
+}
+
+.section-blog{
+  padding-top: 60px;
+}
