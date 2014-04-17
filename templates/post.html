@@ -38,28 +38,13 @@
         </nav>
       </header>
       {% endif %}
-      <main id="main" class="site-main">
+      <main id="main">
 
-        <section id="carousel-1" class="carousel slide section-slide" data-ride="carousel">
 
+        <section id="post-header" class="section-post-header" >
         {% if post.attachment %}
-
-          <div class="carousel-inner">
-           
-            <div class="item active">
-              <div class="container"><img src="{{post.attachment.url}}" alt="{{post.slug}}"></div>
-            </div>
-            </div>
-
-            
-
-          </div>
-
+        <img src="{{post.attachment.url}}" alt="{{post.slug}}">
           {% endif %}
-          <!--
-          <a class="left carousel-control" href="#carousel-1" data-slide="prev"><span class="fa fa-chevron-left"></span></a>
-          <a class="right carousel-control" href="#carousel-1" data-slide="next"><span class="fa fa-chevron-right"></span></a>
-          -->
         </section>
 
         <section class="section text-left section-cta post">

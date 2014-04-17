@@ -44,7 +44,8 @@ font-style: normal;
 letter-spacing: -0.04em;
 font-size: 35px;
 line-height: 1.1;
-margin-bottom: 8px;
+margin-bottom: 55px;
+margin-top: 55px;
 }
 
 .post-content {
@@ -203,4 +204,22 @@ font-size: 40px;
 
 .section-blog{
   padding-top: 60px;
+}
+
+.section-post-header img{
+width: 100%;
+height: auto;
+}
+
+.entry-thumbnail img{
+  width: 100%;
+  height: auto;
+}
+
+.entry-title{
+  margin-top: 0px;
+}
+
+.hentry.post{
+  margin-bottom: 30px;
 }

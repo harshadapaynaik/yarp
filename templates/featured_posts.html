@@ -11,13 +11,12 @@
              <div class="col-md-6">
                 <article class="hentry post">
                   <div class="row">
-                    <div class="entry-thumbnail col-lg-4 col-md-5 col-sm-4">
+                    <div class="entry-thumbnail col-lg-5 col-md-5 col-sm-5">
                       <a href='{% url "blogpost" p.slug %}' class="hover-effect">
-                        <img src="{{p.attachement.url}}" alt="{{p.slug}}" />
-                        <span class="overlay"><i class="fa fa-plus"></i></span>
+                        <img src="{{p.attachment.url}}" alt="{{p.slug}}" />
                       </a>
                     </div>
-                    <div class="col-lg-8 col-md-7 col-sm-8">
+                    <div class="col-lg-7 col-md-7 col-sm-7">
                       <header class="entry-header">
                         <h2 class="entry-title"><a href='{% url "blogpost" p.slug %}'>{{ p.title | chop_title | striptags}}</a></h2>
                         <!--

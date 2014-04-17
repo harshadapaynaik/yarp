@@ -10,7 +10,7 @@ class Post(models.Model):
 	title = models.CharField(max_length=60,  unique=True)
 	body = models.TextField()
 	created = models.DateTimeField(auto_now_add=True)
-	attachment = models.ImageField(upload_to=settings.MEDIA_ROOT+'img/post/%Y/%m/', blank=True, null=True)
+	attachment = models.ImageField(upload_to='img/post/%Y/%m/', blank=True, null=True)
 	is_published = models.BooleanField(default=False)
 	is_featured = models.BooleanField(default=False)
 	slug = models.SlugField(_('slug'), max_length=40, blank=True)

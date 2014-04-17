@@ -162,7 +162,7 @@ def editblog_page(request, slug, action):
             post.title = request.POST['title']
             post.body = request.POST['body']
             if 'attachment' in request.FILES:
-                post.attachment = request.POST['title']
+                post.attachment = request.FILES['attachment']
             post.save()
             slug = post.slug
             success_message(request, "editpost", {'post': post})
