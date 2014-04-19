@@ -1,3 +1,4 @@
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +8,7 @@
     <title>{{post.title}} | {{APP_NAME}}</title>
     <link href="{{STATIC_URL}}css/template.css" rel="stylesheet">
      <link href="{{STATIC_URL}}css/yarp.css" rel="stylesheet">
+     <link href="{{STATIC_URL}}css/post.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -48,26 +50,20 @@
         </section>
 
         <section class="section text-left section-cta post">
-          <div class="container">
-            <h2 class="section-title post-title"><span>{{post.title}}</span></h2>
+            <div class="section-title post-title">
+            <h2>{{post.title}}</h2>
+            <br /><span>{{post.created | timesince}} ago</span>
+            </div>
             <div class="span8 post-content">{{post.body |safe }}</div>
-   
-          </div>
         </section>
 
        
 
       
 
-{% include "featured_posts.html" %}
        
 
       </main>
-
-     
-
-
-{% include "footer.html" %}
 </div>
 
   <!--FONTS-->

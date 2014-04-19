@@ -82,22 +82,64 @@
 
 					{% if action == 'edit'%}
 
-					{% if post.is_published == 1 %}
+					
+
 					<div class="control-group">
 									<label class="control-label">Publish This Post</label>
 									<div class="controls">
 										<label class="checkbox inline">
-											<input type="checkbox"  name="is_published">
+											<input type="checkbox"  name="is_published" 
+
+											{% if post.is_published %}
+											checked="checked"
+											{%endif%}
+
+											>
 										</label>
 									</div>
 								</div>
-					{%endif%}
+					
+						<div class="control-group">
+									<label class="control-label"> Feature This Post</label>
+									<div class="controls">
+										<label class="checkbox inline">
+											<input type="checkbox"  name="is_featured" 
+
+											{%if post.is_featured%}
+											checked="checked"
+											{%endif%}
+
+											 >
+										</label>
+									</div>
+						</div>				
+
+					
 
 					<button class="btn btn-success">Save Changes</button>
 					{% endif %}
 					
 					{% if action == 'publish'%}
+
+						<div class="control-group">
+									<label class="control-label"> Feature This Post</label>
+									<div class="controls">
+										<label class="checkbox inline">
+											<input type="checkbox"  name="is_featured" 
+
+											{%if post.is_featured%}
+											checked="checked"
+											{%endif%}
+
+											 >
+										</label>
+									</div>
+						</div>		
+					
 					<button class="btn btn-success">Publish Post</button>
+
+
+
 					{% endif %}
 					
 					{% if action == 'unpublish'%}
@@ -124,10 +166,8 @@
 <script src='{{STATIC_URL}}dashboard/scripts/autosize/jquery.autosize-min.js'></script>
 <!-- BOOTSTRAP DATEPICKER -->
 <script src="{{STATIC_URL}}dashboard/scripts/bootstrap-datepicker.js"></script>
-
 <!-- FULLCALENDAR -->
 <script src="{{STATIC_URL}}dashboard/scripts/fullcalendar/fullcalendar.custom.js"></script>
-
 <!-- MIXITUP -->
 <script src="{{STATIC_URL}}dashboard/scripts/mixitup/jquery.mixitup.min.js"></script>
 {% endblock %}

@@ -2,6 +2,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from yarp.models import Post
+from django.db.models import Q
 
 
 def render_view(request, template, data):
@@ -41,9 +42,9 @@ def featuredPosts():
     '''
     posts = {}
     try:
-        posts = Post.objects.all().filter(is_featured=1)[:4]
+        posts = Post.objects.all().filter(is_featured=True).order_by('-id')[:4]
     except Exception:
         pass
     if not posts.count():
-        posts = Post.objects.all().order_by('-id')[:4]
+        posts = Post.objects.all().filter(~Q(attachment=' ')).order_by('-id')[:4]
     return posts

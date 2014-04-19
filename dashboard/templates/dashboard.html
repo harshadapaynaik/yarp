@@ -15,7 +15,7 @@
 	<script src="{{STATIC_URL}}dashboard/scripts/jquery-1.9.1.min.js"></script>
 	<script src="{{STATIC_URL}}dashboard/scripts/jquery-ui-1.10.1.custom.min.js"></script>
 	<script src="{{STATIC_URL}}dashboard/bootstrap/js/bootstrap.min.js"></script>
-
+    
 
 <script type="text/javascript">
 STATIC_URL = '{{STATIC_URL}}dashboard/';
@@ -33,26 +33,12 @@ STATIC_URL = '{{STATIC_URL}}dashboard/';
 	<ul class="nav nav-list">
 	
 	<li class="active" >
-			<a href='{% url "dashboard" %}'><i class="icon-dashboard"></i>Dashboard</a>
-		</li>	
-
-	<li>
-	<a href='{% url "dashboardblog" %}'><i class="icon-text-width"></i>Blog</a>
-	</li>
+	<a href='{% url "dashboard" %}'><i class="icon-dashboard"></i>Blog</a>
+	</li>	
 
 	<li>
 	<a href='{% url "dashboardposts" %}'><i class="icon-table"></i>Posts</a>
 	</li>
-
-
-	<li>
-	<a href='{% url "dashboardpeople" %}'><i class="icon-group"></i>People</a>
-	</li>
-
-	<li>
-	<a href='{% url "dashboardprofile" %}'><i class="icon-user"></i>Profile</a>
-	</li>
-
 
 	</ul>
 </div>
@@ -80,25 +66,25 @@ STATIC_URL = '{{STATIC_URL}}dashboard/';
 		-->
 
 		<div class="span12">
-		<div class="span3">
-		<h2>{{pagename}}</h2>
-		<div class="muted">
+			<div class="span6">
+			{% block headcontent %}
+			<h2>{{pagename}}</h2>
+			<div class="muted">
 			{{pagedesc}}
-		</div>
+			</div>
+
+	{% endblock %}
+		
 		</div>
 
-		<div class="span7">
+		<div class="span4">
 
 			{% include "notifications.html" %}
 
 		</div>
 		</div>
 
-		{% block headcontent %}
-
-
-
-	{% endblock %}
+	
 
 	</div>
 	<div class="content-body">

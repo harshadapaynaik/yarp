@@ -13,18 +13,20 @@
                   <div class="row">
                     <div class="entry-thumbnail col-lg-5 col-md-5 col-sm-5">
                       <a href='{% url "blogpost" p.slug %}' class="hover-effect">
+                        {% if p.attachment%}
                         <img src="{{p.attachment.url}}" alt="{{p.slug}}" />
+                        {%endif%}
                       </a>
                     </div>
                     <div class="col-lg-7 col-md-7 col-sm-7">
-                      <header class="entry-header">
-                        <h2 class="entry-title"><a href='{% url "blogpost" p.slug %}'>{{ p.title | chop_title | striptags}}</a></h2>
+                      <header class="entry-header text-left">
+                        <span class="entry-title"><a href='{% url "blogpost" p.slug %}'>{{ p.title | chop_title:50 | striptags}}</a></span>
                         <!--
                         <div class="entry-meta">By <a href="index.html#">Jackie Lord</a> in <a href="index.html#">Category</a></div>
                         -->
                       </header>
-                      <div class="entry-content">
-                        <p>{{ p.body  | chop_body | striptags}}</p>
+                      <div class="entry-content text-left">
+                        <p>{{ p.body  | chop_body:130 | striptags}}</p>
                         <a href='{% url "blogpost" p.slug %}' class="more"><span class="btn btn-primary">Continue Reading</span></a>
                       </div>
                     </div>

@@ -10,6 +10,7 @@ from django.contrib.auth import authenticate, login
 from yarp.decorators import logged_out_required
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def render_view(request, template, data={}):
@@ -19,8 +20,8 @@ def render_view(request, template, data={}):
     @template  string
     @data  tumple
     '''
-    data['pagename'] = 'Dashboard'
-    data['pagedesc'] = 'Sample description for dashboard page'
+    data['pagename'] = 'Write'
+    data['pagedesc'] = 'create a post here'
     return render_to_response(
         template, data,
         context_instance=RequestContext(request)
@@ -35,13 +36,6 @@ def landing_page(request):
     '''
     if not request.user.is_active or not request.user.is_staff:
         return render_view(request, 'login.html', {})
-    if request.POST:
-        form = AddPostForm(request.POST, request.FILES)
-        if not form.is_valid():
-            error_message(request, "addpost")
-        else:
-            post = form.save()
-            success_message(request, "addpost", {'post': post, 'is_published': request.POST['is_published']})
     return render_view(request, 'dashboard-index.html', {})
 
 
@@ -55,13 +49,14 @@ def blog_page(request):
     if not request.user.is_active or not request.user.is_staff:
         return render_view(request, 'login.html', {})
     if request.POST:
+        print request.POST
         form = AddPostForm(request.POST, request.FILES)
         if not form.is_valid():
             error_message(request, "addpost")
         else:
             post = form.save()
             success_message(request, "addpost", {'post': post, 'is_published': request.POST['is_published']})
-    return render_view(request, 'dashboard-blog.html', {})
+    return render_view(request, 'dashboard-index.html', {})
 
 
 @login_required
@@ -70,43 +65,30 @@ def posts_page(request):
     handles the dashobard posts
     '''
     posts = {}
-    #pagename = 'Posts'
-    #pagedesc = 'Edit your posts here'
     try:
-        posts = Post.objects.all().order_by('-id')
+        posts_list = Post.objects.all().order_by('-id')
+        if 'query' in request.GET:
+            posts_list.extra(where=["title LIKE '%"+request.GET['query']+"%"])
+        if 'filter' in request.GET:
+            typefilter = request.GET['filter']
+            if typefilter == 1:
+                posts_list.filter(is_published=True)
+            if typefilter == 2:
+                posts_list.filter(is_published=False)
+        paginator = Paginator(posts_list, settings.PAGNATION_LIMIT)
+        page = request.GET.get('page')
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            posts = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            posts = paginator.page(paginator.num_pages)
     except Exception, e:
+        #we have no posts
         raise e
     return render_view(request, 'dashboard-posts.html', {'posts': posts})
-
-
-@login_required
-def people_page(request):
-    '''
-    handles the dashobard posts
-    '''
-    posts = {}
-    #pagename = 'Posts'
-    #pagedesc = 'Edit your posts here'
-    try:
-        posts = Post.objects.all().order_by('-id')
-    except Exception, e:
-        raise e
-    return render_view(request, 'dashboard-people.html', {'posts': posts})
-
-
-@login_required
-def profile_page(request):
-    '''
-    handles the dashobard posts
-    '''
-    posts = {}
-    #pagename = 'Posts'
-    #pagedesc = 'Edit your posts here'
-    try:
-        posts = Post.objects.all().order_by('-id')
-    except Exception, e:
-        raise e
-    return render_view(request, 'dashboard-profile.html', {'posts': posts})
 
 
 @logged_out_required
@@ -161,6 +143,14 @@ def editblog_page(request, slug, action):
         if post_action == 'edit':
             post.title = request.POST['title']
             post.body = request.POST['body']
+            if 'is_featured' in request.POST:
+                post.is_featured = True
+            else:
+                post.is_featured = False
+            if 'is_published' in request.POST:
+                post.is_published = True
+            else:
+                post.is_published = False
             if 'attachment' in request.FILES:
                 post.attachment = request.FILES['attachment']
             post.save()
@@ -172,13 +162,18 @@ def editblog_page(request, slug, action):
             success_message(request, "deletepost",)
             return HttpResponseRedirect(reverse('dashboardposts',))
         if post_action == 'unpublish':
-            post.is_published = 0
+            post.is_published = False
+            post.is_featured = False
             post.save()
             success_message(request, "unpublish",)
             action = 'publish'
             return HttpResponseRedirect(reverse('editblogpost', args=(slug, action)))
         if post_action == 'publish':
-            post.is_published = 1
+            post.is_published = True
+            if 'is_featured' in request.POST:
+                post.is_featured = True
+            else:
+                post.is_featured = False
             post.save()
             success_message(request, "editpost", {'post': post})
             action = 'edit'

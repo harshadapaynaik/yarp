@@ -11,7 +11,7 @@
             	{% if p.attachment %}
             	<img src="{{p.attachment.url}}" alt="{{p.slug}}">
             	{% endif%}
-              <div class="carousle-text">{{ p.title | chop_title:40 | striptags}}</div>
+              <a href='{% url "blogpost" p.slug %}' class="more"><div class="carousle-text">{{ p.title | chop_title:40 | striptags}}</div></a>
             </div>
     		{% endfor %}
           

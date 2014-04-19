@@ -1,3 +1,4 @@
 Django>=1.6.1
 South>=0.8.4
 Pillow
+django-session-security

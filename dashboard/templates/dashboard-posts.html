@@ -15,28 +15,39 @@
 							<div class="row-fluid">
 								<div class="span8">
 								<div class="span9">
-									<form class="form-absolute">
+									<form class="form-absolute" action='{% url "dashboardposts" %}'>
+										<input type="hidden" name="filter" id="filter" value="0">
 										<button class="btn btn-icon go-right"><i class="icon-search"></i></button>
-										<input type="text" name="search" class="input-block-level" placeholder="Search posts..." autocomplete="off">
+										<input type="text" name="query" class="input-block-level" placeholder="Search Posts..." autocomplete="off">
 									</form>
 									
 									</div>
 									<div class="span3">
-									<select class="btn input-block-level">
-										<option>All</option>
-										<option>Published</option>
-										<option>UnPublished</option>
+									<select id="selectfilter" class="btn input-block-level" name="filter" onchange="$('#filter').val($(this).val());">
+										<option value="0">All</option>
+										<option value="1">Published</option>
+										<option value="2">UnPublished</option>
 									</select>
 									</div>
 
 								</div>
 								<div class="span4 message-navigation align-right hidden-phone">
-									<div class="btn-toolbar">
-										<div class=" btn-group">
-											<button class="btn"><i class="icon-chevron-left"></i></button>
-											<button class="btn"><i class="icon-chevron-right"></i></button>
-										</div>
-									</div>
+							
+
+								<div class="btn-toolbar">
+        {% if posts.has_previous %}
+            	<a href="?page={{ posts.previous_page_number }}&query={{request.GET.query}}&filter={{request.GET.filter}}" class="btn"><i class="icon-chevron-left"></i></a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}&query={{request.GET.query}}&filter={{request.GET.filter}}" class="btn"><i class="icon-chevron-right"></i></a>
+        {% endif %}
+        </div>
+
 								</div>
 							</div>
 						</div>
@@ -47,7 +58,7 @@
 								{% for p in posts %}
 
 
-								<tr><td class="cell-avatar">
+								<tr class="searchable"><td class="cell-avatar">
 									{% if p.attachment %}
 									
 										<img src="{{p.attachment.url}}" class="avatar editpost-img">
@@ -56,8 +67,8 @@
 									</td>
 									<td class="cell-detail">
 										<button type="button" class="btn btn-inverse pull-right" data-toggle="collapse" data-target="#people-brief-{{p.id}}"><i class="icon-ellipsis-horizontal"></i></button>
-										<h5 class="people-name"><a href='{% url "blogpost" p.slug %}'>{{p.title}}</a></h5>
-										<div class="people-brief">{{ p.body  | chop_body:250 | striptags}}</div>
+										<h5 class="people-name "><a href='{% url "blogpost" p.slug %}'>{{p.title}}</a></h5>
+										<div class="people-brief ">{{ p.body  | chop_body:250 | striptags}}</div>
 										
 										<!--
 										<div class="muted">
@@ -69,8 +80,11 @@
 												<p>
 													{% if p.is_published %}
 													<a href='{% url "editblogpost" slug=p.slug action="unpublish" %}' class="btn btn-danger"><i class="icon-off"></i> &nbsp; UnPublish</a>
+
 													{% else %}
-													<a href='{% url "editblogpost" slug=p.slug action="publish" %}' class="btn btn-success"><i class="icon-on"></i> &nbsp;Publish</a>
+													
+													<a href='{% url "editblogpost" slug=p.slug action="publish" %}' class="btn btn-success"><i class="icon-ok"></i> &nbsp;Publish</a>
+													
 													{%endif%}
 
 													<a href='{% url "editblogpost" slug=p.slug action="edit" %}' class="btn btn-primary"><i class="icon-edit"></i> &nbsp; Edit</a>
@@ -86,23 +100,40 @@
 
 							</tbody>
 						</table>
-						<div class="module-option">
+
+
+<div class="module-option" id="livePagnation" data-url="">
+
 							<div class="row-fluid">
 								<div class="span8 hidden-phone">
 									<div style="line-height: 30px">
-										Displaying <b>10</b> of {{ posts.count }} posts
+										
 									</div>
 								</div>
 								<div class="span4 message-navigation align-right">
-									<div class="btn-toolbar">
-										<div class=" btn-group">
-											<button class="btn"><i class="icon-chevron-left"></i></button>
-											<button class="btn"><i class="icon-chevron-right"></i></button>
-										</div>
-									</div>
+						
+
+								<div class="btn-toolbar">
+        {% if posts.has_previous %}
+            	<a href="?page={{ posts.previous_page_number }}&query={{request.GET.query}}&filter={{request.GET.filter}}" class="btn"><i class="icon-chevron-left"></i></a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}&query={{request.GET.query}}&filter={{request.GET.filter}}" class="btn"><i class="icon-chevron-right"></i></a>
+        {% endif %}
+        </div>
+
+
 								</div>
 							</div>
 						</div>
+
+
+
 					</div><!--/.module-body-->
 				</div><!--/.module.message-->
 			</div><!--/.span12-->
@@ -112,8 +143,13 @@
 <section class="module">
 <div class="module-body">
 <div class="alert">
-				  
+				  {% if request.GET.query or request.GET.query %}
+				  You Search returned no Posts! <br /><strong><a href="{% url "dashboardposts" %}">Click here </a></strong> to go back.
+				  {% else %}
+
 				  You Currently have no Posts! <br /><strong><a href="{{DASHBOARD_URL}}">Click here </a></strong> to create some.
+				
+				  {% endif %}
 				</div>
 				</div>
 				</section>

@@ -27,35 +27,16 @@ color: #000;
 
 
 .site-topbar {
-background: #4b494f;
-padding: 20px 0;
+background: #fff;
+padding: 10px 0;
 color: #999;
+border: 1px solid transparent;
 }
 
 .site-main {
 padding-top: 50px;
 }
 
-.post-title {
-font-family: "jaf-bernino-sans","Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
-letter-spacing: -0.02em;
-font-weight: 700;
-font-style: normal;
-letter-spacing: -0.04em;
-font-size: 35px;
-line-height: 1.1;
-margin-bottom: 55px;
-margin-top: 55px;
-}
-
-.post-content {
-font-family: "freight-text-pro",Georgia,Cambria,"Times New Roman",Times,serif;
-letter-spacing: .01rem;
-font-weight: 400;
-font-style: normal;
-font-size: 22px;
-line-height: 1.5;
-}
 
 .site-navbar .navbar-nav {
 margin: 5px 0 !important;
@@ -220,6 +201,16 @@ height: auto;
   margin-top: 0px;
 }
 
+.entry-title a{
+  margin-top: 0px;
+  font-size: 20px;
+}
+
 .hentry.post{
+  width: 100%;
   margin-bottom: 30px;
+  max-height: 160px;
+  float: right;
+  display: block;
+  overflow: hidden;
 }

@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'south',
     'yarp',
     'dashboard',
+    'session_security',
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
@@ -186,5 +187,8 @@ try:
 except ImportError:
     pass
 
+PAGNATION_LIMIT = 20
 DASHBOARD_URL = BASE_URL + 'dashboard/'
 LOGIN_URL = DASHBOARD_URL + 'login'
+#Session security
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
